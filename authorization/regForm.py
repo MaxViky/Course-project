@@ -1,11 +1,8 @@
 from tkinter import *
 import sqlite3 as sql
 from tkinter import messagebox
+from connection import *
 
-import null
-
-conn = sql.connect("database/hostels.db")
-cur = conn.cursor()
 blue = '#42AAE8'
 white = 'White'
 

@@ -1,8 +1,5 @@
-from loginForm import *
-from regForm import *
+from authorization.loginForm import Login
 
-
-reg = Reg
 win = Login()
 win.Create()
 win.btnEnter['command'] = win.Enter
