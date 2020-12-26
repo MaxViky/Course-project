@@ -1,10 +1,9 @@
 from tkinter import *
-import sqlite3 as sql
+from tkinter import messagebox
+from AdminPanel import AdminMenu
+from connection import *
+from authorization.regForm import Reg
 
-from regForm import Reg
-
-conn = sql.connect("database/hostels.db")
-cur = conn.cursor()
 blue = '#42AAE8'
 white = 'White'
 
@@ -39,9 +38,11 @@ class Login:
                     .format(username, password))
         user = cur.fetchall()
         if not user:
-            print('Ошибка')
+            messagebox.showinfo('Ошибка', 'Неверный логин или пароль.')
         else:
-            print('Успешно! Вы ' + user[0][2])
+            adminPanel = AdminMenu()
+            adminPanel.__init__()
+
 
     def Reg(self):
         reg = Reg()

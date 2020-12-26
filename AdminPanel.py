@@ -8,9 +8,7 @@ class AdminMenu:
         self.win = Tk()
         self.menu = Menu()
         self.file_menu = Menu(font=("Comic Sans MS", 12), tearoff=0)
-        self.create()
 
-    def create(self):
         self.win.title('Панель администратора')
         self.win.geometry('800x650')
         self.file_menu.add_command(label="Комнаты", command=self.createRoom)
@@ -25,6 +23,9 @@ class AdminMenu:
         self.menu.add_cascade(label="Информация", font=("Comic Sans MS", 12))
         self.win.configure(menu=self.menu)
         self.win.mainloop()
+
+    def create(self):
+        pass
 
     def createRoom(self):
         self.room = Room(self.win)
@@ -44,3 +45,6 @@ class AdminMenu:
 
     def createUser(self):
         self.room.destroy()
+
+
+d = AdminMenu()
