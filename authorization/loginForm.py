@@ -21,6 +21,8 @@ class Login:
         self.e_password = Entry(self.window, font=('Comic Sans MS', 18), show="*")
         self.btnEnter = Button(self.window, text='Войти', font=('Comic Sans MS', 12))
         self.btnReg = Button(self.window, text='Зарегистрироваться', font=('Comic Sans MS', 12))
+        self.btnEnter['command'] = self.Enter
+        self.btnReg['command'] = self.Reg
 
     def Create(self):
         self.l_name.grid(row=0, column=1, columnspan=3)
@@ -30,6 +32,7 @@ class Login:
         self.e_password.grid(row=2, column=1, columnspan=2)
         self.btnEnter.grid(row=3, column=1)
         self.btnReg.grid(row=3, column=2)
+        self.window.mainloop()
 
     def Enter(self):
         username = str(self.e_username.get())
@@ -41,8 +44,6 @@ class Login:
             messagebox.showinfo('Ошибка', 'Неверный логин или пароль.')
         else:
             adminPanel = AdminMenu()
-            adminPanel.__init__()
-
 
     def Reg(self):
         reg = Reg()

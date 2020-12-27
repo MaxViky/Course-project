@@ -13,8 +13,8 @@ class Room:
         self.verticalScrollBar = ttk.Scrollbar(win, orient="vertical", command=self.room_table.yview)
 
         self.AddBtn = Button(win, text='Добавить')
-        self.EditBtn = Button(win, text='Редактировать')
-        self.DeleteBtn = Button(win, text='Удалить')
+        self.EditBtn = Button(win, text='Редактировать', width=20)
+        self.DeleteBtn = Button(win, text='Удалить', width=20)
 
         self.l_name = Label(win, text="Название", justify=RIGHT)
         self.l_type = Label(win, text="Тип")
@@ -59,7 +59,7 @@ class Room:
         self.room_table.heading("7", text="Занят")
         self.room_table.heading("8", text="Фото")
 
-        self.AddBtn['command'] = self.addRoom
+        self.AddBtn['command'] = self.AddRoom
         self.EditBtn['command'] = self.UpdateRoom
         self.DeleteBtn['command'] = self.DeleteRoom
 
@@ -93,12 +93,12 @@ class Room:
         self.EditBtn.grid(row=9, column=1)
         self.DeleteBtn.grid(row=10, column=1)
 
-    def destroy(self):
+    def Destroy(self):
         self.room_table.destroy()
         self.horizontalScrollBar.destroy()
         self.verticalScrollBar.destroy()
 
-    def addRoom(self):
+    def AddRoom(self):
         try:
             command = "INSERT INTO rooms VALUES(Null, '{0}', {1}, {2}, {3}, {4}, {5}, '{6}')".format(
                 self.e_name.get(), self.e_type.get(), self.e_cost.get(),
