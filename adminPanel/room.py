@@ -8,9 +8,14 @@ from connection import *
 class Room:
     def __init__(self, win):
         self.room_table = ttk.Treeview(win, height=10)
-        self.AddBtn = Button(win, text='Добавить')
+
         self.horizontalScrollBar = ttk.Scrollbar(win, orient="horizontal", command=self.room_table.xview)
         self.verticalScrollBar = ttk.Scrollbar(win, orient="vertical", command=self.room_table.yview)
+
+        self.AddBtn = Button(win, text='Добавить')
+        self.EditBtn = Button(win, text='Редактировать')
+        self.DeleteBtn = Button(win, text='Удалить')
+
         self.l_name = Label(win, text="Название", justify=RIGHT)
         self.l_type = Label(win, text="Тип")
         self.l_cost = Label(win, text="Стоимость")
@@ -55,6 +60,8 @@ class Room:
         self.room_table.heading("8", text="Фото")
 
         self.AddBtn['command'] = self.addRoom
+        self.EditBtn['command'] = self.UpdateRoom
+        self.DeleteBtn['command'] = self.DeleteRoom
 
     def create(self):
         cur.execute("SELECT * FROM rooms")
@@ -83,6 +90,8 @@ class Room:
         self.e_photo.grid(row=8, column=2)
 
         self.AddBtn.grid(row=9, column=2)
+        self.EditBtn.grid(row=9, column=1)
+        self.DeleteBtn.grid(row=10, column=1)
 
     def destroy(self):
         self.room_table.destroy()
@@ -98,5 +107,26 @@ class Room:
             cur.execute(command)
             conn.commit()
         except:
-            messagebox.showinfo('Ошибка', 'Не удалось добавить комнату')
-        # row_id = self.room_table.focus()[1:]
+            messagebox.showinfo('Ошибка', 'Не удалось добавить данные')
+
+    def UpdateRoom(self):
+        _id = self.room_table.item(self.room_table.selection(), 'values')[0]
+        command = "UPDATE rooms SET " \
+                  "name='{0}', type={1}, cost={2}, bed_count={3}, breakfast={4}, busy={5}, photo='{6}' WHERE id={7}".format(
+            self.e_name.get(), self.e_type.get(), self.e_cost.get(),
+            self.e_beds.get(), self.e_breakfast.get(), self.e_busy.get(), self.e_photo.get(), _id
+        )
+        try:
+            cur.execute(command)
+        except:
+            messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
+        conn.commit()
+
+    def DeleteRoom(self):
+        _id = self.room_table.item(self.room_table.selection(), 'values')[0]
+        command = "DELETE FROM rooms WHERE id={0}".format(_id)
+        try:
+            cur.execute(command)
+        except:
+            messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
+        conn.commit()
