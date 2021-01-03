@@ -46,4 +46,4 @@ class AdminMenu:
     def CreateUser(self):
         self.room.Destroy()
 
-AdminMenu()
+#AdminMenu()

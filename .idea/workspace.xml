@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="acd23832-e47a-4af2-be81-e81d8acebfdf" name="Default Changelist" comment="">
+    <list default="true" id="acd23832-e47a-4af2-be81-e81d8acebfdf" name="Default Changelist" comment="Update AdminPanel.py and room.py">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/MaxNet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Hostel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Hostel.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AdminPanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/AdminPanel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/adminPanel/ff.py" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/ff.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adminPanel/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/adminPanel/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authorization/loginForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/authorization/loginForm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/hostels.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/hostels.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/desktop.ini" beforeDir="false" afterPath="$PROJECT_DIR$/desktop.ini" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,17 +51,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\student\Documents\Course-project-master\adminPanel" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\student\Documents\Course-project-master\authorization" />
       <recent name="E:\Projects\Курсовая 2020-2021\Hostel\database" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\student\Documents\Course-project-master\adminPanel" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.AdminPanel">
+  <component name="RunManager" selected="Python.main">
     <configuration name="AdminPanel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hostel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -63,9 +70,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\student\AppData\Local\Programs\Python\Python38\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AdminPanel.py" />
@@ -161,10 +168,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.AdminPanel" />
+      <item itemvalue="Python.ff" />
+      <item itemvalue="Python.loginForm" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.room" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.AdminPanel" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.AdminPanel" />
         <item itemvalue="Python.loginForm" />
         <item itemvalue="Python.room" />
         <item itemvalue="Python.ff" />
@@ -225,6 +239,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Update AdminPanel.py and room.py" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609129675729">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609129675729" />
     <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2" timestamp="1609069560542">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
@@ -233,50 +251,59 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="500" y="184" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1608959435083" />
-    <state width="1419" height="222" key="GridCell.Tab.0.bottom" timestamp="1609072612737">
-      <screen x="0" y="0" width="1440" height="860" />
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom" timestamp="1609138840387">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1419" height="222" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1609072612736" />
-    <state width="1899" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608114147877" />
-    <state width="1419" height="222" key="GridCell.Tab.0.center" timestamp="1609072612736">
-      <screen x="0" y="0" width="1440" height="860" />
+    <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center" timestamp="1609138840387">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1419" height="222" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1609072612736" />
-    <state width="1899" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608114147876" />
-    <state width="1419" height="222" key="GridCell.Tab.0.left" timestamp="1609072612736">
-      <screen x="0" y="0" width="1440" height="860" />
+    <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left" timestamp="1609138840387">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1419" height="222" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1609072612736" />
-    <state width="1899" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608114147876" />
-    <state width="1419" height="222" key="GridCell.Tab.0.right" timestamp="1609072612736">
-      <screen x="0" y="0" width="1440" height="860" />
+    <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.0.right" timestamp="1609138840387">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1419" height="222" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1609072612736" />
-    <state width="1899" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608114147876" />
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1608112182808">
+    <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom" timestamp="1609138840387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608112182808" />
-    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1608112182808">
+    <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.1.center" timestamp="1609138840387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608112182808" />
-    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1608112182808">
+    <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.1.left" timestamp="1609138840387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608112182808" />
-    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1608112182808">
+    <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right" timestamp="1609138840387">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608112182808" />
+    <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
+    <state x="346" y="136" key="SettingsEditor" timestamp="1609683387725">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="346" y="136" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1609683387725" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1609137468108" />
+    <state x="790" y="389" key="VCS.EditChangelistDialog" timestamp="1609137069856">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="790" y="389" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609137069856" />
     <state x="324" y="107" key="Vcs.Push.Dialog.v2" timestamp="1609069576808">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="324" y="107" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1609069576808" />
-    <state x="415" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1609069073181">
+    <state x="415" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1609683375429">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="415" y="253" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1609069073181" />
+    <state x="415" y="253" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1609683375429" />
     <state x="517" y="221" key="git4idea.merge.GitMergeDialog" timestamp="1608959428036">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
@@ -285,5 +312,9 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="383" y="180" key="search.everywhere.popup/0.0.1440.860@0.0.1440.860" timestamp="1608011152110" />
+    <state x="790" y="311" key="svn.repositoryBrowser" timestamp="1609137101273">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="790" y="311" key="svn.repositoryBrowser/0.0.1920.1040@0.0.1920.1040" timestamp="1609137101273" />
   </component>
 </project>
