@@ -1,28 +1,21 @@
-import sqlite3 as sql
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
+
+from Search import Search
+from PageController import PageController
 from connection import *
 
 
 class Room:
     def __init__(self, win):
-        self.page = 1
-
-        cur.execute('SELECT Count(*) FROM rooms')
-        self.pageCount = cur.fetchone()[0] % 5
-
+        self.command = 'SELECT * FROM rooms'
         self.room_table = ttk.Treeview(win, height=10)
-
-        self.verticalScrollBar = ttk.Scrollbar(win, orient="vertical", command=self.room_table.yview)
+        self.fields = ['name', 'type', 'cost', 'beds_count', 'breakfast', 'busy']
 
         self.AddBtn = Button(win, text='Добавить')
         self.EditBtn = Button(win, text='Редактировать', width=15)
         self.DeleteBtn = Button(win, text='Удалить', width=15)
         self.ChoiceImage = Button(win, text='...', width=5)
-
-        self.nextPage = Button(win, text='->')
-        self.previousPage = Button(win, text='<-')
-        self.pageInfo = Label(win)
 
         self.l_name = Label(win, text="Название", justify=RIGHT)
         self.l_type = Label(win, text="Тип")
@@ -39,11 +32,11 @@ class Room:
         self.e_breakfast = Entry(win, width=20)
         self.e_busy = ttk.Combobox(win, width=17)
         self.e_photo = Entry(win, width=20)
+        self.initUI(win)
 
-        self.initUI()
-
-    def initUI(self):
-        self.room_table.configure(yscrollcommand=self.verticalScrollBar.set)
+    def initUI(self, win):
+        PageController(win, 'SELECT COUNT(*) FROM rooms', self.room_table, self.command)
+        # Search(win, self.command, self.room_table, self.fields)
 
         self.room_table["columns"] = ("1", "2", "3", "4", "5", "6", "7", "8")
         self.room_table["show"] = 'headings'
@@ -66,18 +59,13 @@ class Room:
         self.room_table.heading("7", text="Занят")
         self.room_table.heading("8", text="Фото")
 
-        self.pageInfo['text'] = '{0}-{1}'.format(self.page, self.pageCount)
-
         cur.execute('SELECT type FROM roomtype')
         self.e_type['values'] = cur.fetchall()
-
         self.e_busy['values'] = ['Да', 'Нет']
 
         self.AddBtn['command'] = self.AddRoom
         self.EditBtn['command'] = self.UpdateRoom
         self.DeleteBtn['command'] = self.DeleteRoom
-        self.nextPage['command'] = self.Next
-        self.previousPage['command'] = self.Previous
         self.ChoiceImage['command'] = self.Browse
 
     def create(self):
@@ -87,36 +75,51 @@ class Room:
             self.room_table.insert("", "end", values=row)
 
         self.room_table.grid(row=0, column=1, columnspan=20)
-        self.verticalScrollBar.grid(row=0, column=0)
 
-        self.nextPage.grid(row=1, column=5)
-        self.pageInfo.grid(row=1, column=4)
-        self.previousPage.grid(row=1, column=3)
+        self.l_name.grid(row=3, column=1, sticky='w')
+        self.l_type.grid(row=4, column=1, sticky='w')
+        self.l_cost.grid(row=5, column=1, sticky='w')
+        self.l_beds.grid(row=6, column=1, sticky='w')
+        self.l_breakfast.grid(row=7, column=1, sticky='w')
+        self.l_busy.grid(row=8, column=1, sticky='w')
+        self.l_photo.grid(row=9, column=1, sticky='w')
 
-        self.l_name.grid(row=2, column=1, sticky='w')
-        self.l_type.grid(row=3, column=1, sticky='w')
-        self.l_cost.grid(row=4, column=1, sticky='w')
-        self.l_beds.grid(row=5, column=1, sticky='w')
-        self.l_breakfast.grid(row=6, column=1, sticky='w')
-        self.l_busy.grid(row=7, column=1, sticky='w')
-        self.l_photo.grid(row=8, column=1, sticky='w')
+        self.e_name.grid(row=3, column=2, sticky='w')
+        self.e_type.grid(row=4, column=2, sticky='w')
+        self.e_cost.grid(row=5, column=2, sticky='w')
+        self.e_beds.grid(row=6, column=2, sticky='w')
+        self.e_breakfast.grid(row=7, column=2, sticky='w')
+        self.e_busy.grid(row=8, column=2, sticky='w')
+        self.e_photo.grid(row=9, column=2, sticky='w')
 
-        self.e_name.grid(row=2, column=2, sticky='w')
-        self.e_type.grid(row=3, column=2, sticky='w')
-        self.e_cost.grid(row=4, column=2, sticky='w')
-        self.e_beds.grid(row=5, column=2, sticky='w')
-        self.e_breakfast.grid(row=6, column=2, sticky='w')
-        self.e_busy.grid(row=7, column=2, sticky='w')
-        self.e_photo.grid(row=8, column=2, sticky='w')
-
-        self.AddBtn.grid(row=9, column=2)
-        self.EditBtn.grid(row=9, column=1)
-        self.DeleteBtn.grid(row=10, column=1)
-        self.ChoiceImage.grid(row=8, column=3)
+        self.AddBtn.grid(row=10, column=2)
+        self.EditBtn.grid(row=10, column=1)
+        self.DeleteBtn.grid(row=11, column=1)
+        self.ChoiceImage.grid(row=9, column=3)
 
     def Destroy(self):
         self.room_table.destroy()
-        self.verticalScrollBar.destroy()
+
+        self.l_name.destroy()
+        self.l_type.destroy()
+        self.l_cost.destroy()
+        self.l_beds.destroy()
+        self.l_breakfast.destroy()
+        self.l_busy.destroy()
+        self.l_photo.destroy()
+
+        self.e_name.destroy()
+        self.e_type.destroy()
+        self.e_cost.destroy()
+        self.e_beds.destroy()
+        self.e_breakfast.destroy()
+        self.e_busy.destroy()
+        self.e_photo.destroy()
+
+        self.AddBtn.destroy()
+        self.EditBtn.destroy()
+        self.DeleteBtn.destroy()
+        self.ChoiceImage.destroy()
 
     def AddRoom(self):
         cur.execute("SELECT id FROM roomtype WHERE type='{0}'".format(self.e_type.get()))
@@ -168,28 +171,10 @@ class Room:
             messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
         conn.commit()
 
-    def Next(self):
-        if self.page < self.pageCount:
-            self.page += 1
-
-            self.pageInfo['text'] = '{0}-{1}'.format(self.page, self.pageCount)
-
-            self.room_table.delete(*self.room_table.get_children())
-            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET {0}+3".format(self.page))
-            rows = cur.fetchall()
-            for row in rows:
-                self.room_table.insert("", "end", values=row)
-
-    def Previous(self):
-        if self.page > 1:
-            self.page -= 1
-            self.pageInfo['text'] = '{0}-{1}'.format(self.page, self.pageCount)
-            self.room_table.delete(*self.room_table.get_children())
-            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET {0}-4".format(self.page))
-            rows = cur.fetchall()
-            for row in rows:
-                self.room_table.insert("", "end", values=row)
-
     def Browse(self):
-        file = filedialog.askdirectory()
-        self.e_photo.setvar(file)
+        file = filedialog.askopenfilename()
+        self.e_photo.delete(0, END)
+        self.e_photo.insert(0, file)
+
+
+

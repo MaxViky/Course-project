@@ -43,7 +43,8 @@ class Login:
         if not user:
             messagebox.showinfo('Ошибка', 'Неверный логин или пароль.')
         else:
-            adminPanel = AdminMenu()
+            self.window.destroy()
+            AdminMenu()
 
     def Reg(self):
         reg = Reg()
