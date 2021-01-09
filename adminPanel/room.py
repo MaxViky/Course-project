@@ -97,30 +97,6 @@ class Room:
         self.DeleteBtn.grid(row=11, column=1)
         self.ChoiceImage.grid(row=9, column=3)
 
-    def Destroy(self):
-        self.room_table.destroy()
-
-        self.l_name.destroy()
-        self.l_type.destroy()
-        self.l_cost.destroy()
-        self.l_beds.destroy()
-        self.l_breakfast.destroy()
-        self.l_busy.destroy()
-        self.l_photo.destroy()
-
-        self.e_name.destroy()
-        self.e_type.destroy()
-        self.e_cost.destroy()
-        self.e_beds.destroy()
-        self.e_breakfast.destroy()
-        self.e_busy.destroy()
-        self.e_photo.destroy()
-
-        self.AddBtn.destroy()
-        self.EditBtn.destroy()
-        self.DeleteBtn.destroy()
-        self.ChoiceImage.destroy()
-
     def AddRoom(self):
         cur.execute("SELECT id FROM roomtype WHERE type='{0}'".format(self.e_type.get()))
         type = cur.fetchone()[0]

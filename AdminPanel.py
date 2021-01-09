@@ -8,6 +8,7 @@ from adminPanel.type import RoomType
 class AdminMenu:
     def __init__(self):
         self.win = Tk()
+        self.frame = Frame(self.win)
         self.win.title('Панель администратора')
         self.win.geometry('800x650')
         self.Create()
@@ -27,43 +28,45 @@ class AdminMenu:
         menu.add_cascade(label="Таблицы", menu=file_menu)
         menu.add_cascade(label="Информация")
         self.win.configure(menu=menu)
+        self.frame.grid(row=0, column=0)
         self.win.mainloop()
+
 
     def CreateRoom(self):
         try:
-            self.roomtype.Destroy()
-            self.clients.Destroy()
+            for widget in self.frame.winfo_children():
+                widget.destroy()
         except:
             pass
-        self.room = Room(self.win)
+        self.room = Room(self.frame)
         self.room.create()
 
     def CreateClient(self):
         try:
-            self.room.Destroy()
-            self.roomtype.Destroy()
+            for widget in self.frame.winfo_children():
+                widget.destroy()
         except:
             pass
-        self.clients = Clients(self.win)
+        self.clients = Clients(self.frame)
         self.clients.create()
 
     def CreateReserv(self):
-        self.room.Destroy()
+        pass
 
     def CreateType(self):
         try:
-            self.room.Destroy()
-            self.clients.Destroy()
+            for widget in self.frame.winfo_children():
+                widget.destroy()
         except:
             pass
-        self.roomtype = RoomType(self.win)
+        self.roomtype = RoomType(self.frame)
         self.roomtype.create()
 
     def CreateDiscount(self):
-        self.room.Destroy()
+        pass
 
     def CreateUser(self):
-        self.room.Destroy()
+        pass
 
 
 AdminMenu()

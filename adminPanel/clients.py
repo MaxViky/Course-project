@@ -76,24 +76,6 @@ class Clients:
         self.DeleteBtn.grid(row=8, column=1)
         self.ChoiceImage.grid(row=6, column=3)
 
-    def Destroy(self):
-        self.client_table.destroy()
-
-        self.l_name.destroy()
-        self.l_phone.destroy()
-        self.l_passport.destroy()
-        self.l_photo.destroy()
-
-        self.e_name.destroy()
-        self.e_phone.destroy()
-        self.e_passport.destroy()
-        self.e_photo.destroy()
-
-        self.AddBtn.destroy()
-        self.EditBtn.destroy()
-        self.DeleteBtn.destroy()
-        self.ChoiceImage.destroy()
-
     def AddRoom(self):
         try:
             command = "INSERT INTO clients VALUES(Null, '{0}', '{1}', '{2}', '{3}')".format(

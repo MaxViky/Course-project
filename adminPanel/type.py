@@ -60,19 +60,6 @@ class RoomType:
         self.EditBtn.grid(row=10, column=1)
         self.DeleteBtn.grid(row=11, column=1)
 
-    def Destroy(self):
-        self.roomtype_table.destroy()
-
-        self.l_name.destroy()
-        self.l_description.destroy()
-
-        self.e_name.destroy()
-        self.e_description.destroy()
-
-        self.AddBtn.destroy()
-        self.EditBtn.destroy()
-        self.DeleteBtn.destroy()
-
     def AddRoom(self):
         try:
             command = "INSERT INTO roomtype VALUES(Null, '{0}', '{1}')".format(
