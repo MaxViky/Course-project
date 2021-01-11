@@ -10,7 +10,6 @@ class RoomType:
     def __init__(self, win):
         self.command = 'SELECT * FROM roomtype'
         self.roomtype_table = ttk.Treeview(win, height=10)
-        # self.fields = ['name', 'type', 'cost', 'beds_count', 'breakfast', 'busy']
 
         self.AddBtn = Button(win, text='Добавить')
         self.EditBtn = Button(win, text='Редактировать', width=15)
@@ -20,7 +19,7 @@ class RoomType:
         self.l_description = Label(win, text="Описание")
 
         self.e_name = Entry(win, width=20)
-        self.e_description = Entry(win, width=20)
+        self.e_description = Entry(win, width=50)
 
         self.initUI(win)
 
@@ -38,9 +37,11 @@ class RoomType:
         self.roomtype_table.heading("2", text="Тип")
         self.roomtype_table.heading("3", text="Описание")
 
-        self.AddBtn['command'] = self.AddRoom
-        self.EditBtn['command'] = self.UpdateRoom
-        self.DeleteBtn['command'] = self.DeleteRoom
+        self.roomtype_table.bind('<ButtonRelease>', self.fillField)
+
+        self.AddBtn['command'] = self.Add
+        self.EditBtn['command'] = self.Update
+        self.DeleteBtn['command'] = self.Delete
 
     def create(self):
         cur.execute("SELECT * FROM roomtype LIMIT 5 OFFSET 0")
@@ -48,7 +49,7 @@ class RoomType:
         for row in rows:
             self.roomtype_table.insert("", "end", values=row)
 
-        self.roomtype_table.grid(row=0, column=1, columnspan=10)
+        self.roomtype_table.grid(row=0, column=1, columnspan=20, sticky='w')
 
         self.l_name.grid(row=3, column=1, sticky='w')
         self.l_description.grid(row=4, column=1, sticky='w')
@@ -60,29 +61,44 @@ class RoomType:
         self.EditBtn.grid(row=10, column=1)
         self.DeleteBtn.grid(row=11, column=1)
 
-    def AddRoom(self):
+    def Add(self):
         try:
             command = "INSERT INTO roomtype VALUES(Null, '{0}', '{1}')".format(
                 self.e_name, self.e_description
             )
             cur.execute(command)
             conn.commit()
+
+            self.roomtype_table.delete(*self.roomtype_table.get_children())
+
+            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
+            rows = cur.fetchall()
+            for row in rows:
+                self.roomtype_table.insert("", "end", values=row)
         except:
             messagebox.showinfo('Ошибка', 'Не удалось добавить данные')
 
-    def UpdateRoom(self):
-        _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
-        command = "UPDATE roomtype SET " \
-                  "name='{0}', type={1} WHERE id={2}".format(
-            self.e_name.get(), self.e_description.get(), _id
-        )
+    def Update(self):
         try:
+            _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
+            command = "UPDATE roomtype SET " \
+                      "name='{0}', type={1} WHERE id={2}".format(
+                self.e_name.get(), self.e_description.get(), _id
+            )
             cur.execute(command)
+
+            self.roomtype_table.delete(*self.roomtype_table.get_children())
+
+            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
+            rows = cur.fetchall()
+            for row in rows:
+                self.roomtype_table.insert("", "end", values=row)
+
         except:
             messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
         conn.commit()
 
-    def DeleteRoom(self):
+    def Delete(self):
         _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
         command = "DELETE FROM roomtype WHERE id={0}".format(_id)
         try:
@@ -91,5 +107,15 @@ class RoomType:
             messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
         conn.commit()
 
+    def fillField(self, event):
+
+        self.e_name.delete(0, END)
+        self.e_description.delete(0, END)
+
+        _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
+        list = cur.execute('SELECT * FROM roomtype WHERE id={0}'.format(_id)).fetchone()
+
+        self.e_name.insert(0, list[1])
+        self.e_description.insert(0, list[2])
 
 
