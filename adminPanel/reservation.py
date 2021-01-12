@@ -6,6 +6,7 @@ from tkcalendar import DateEntry
 
 from Search import Search
 from PageController import PageController
+from Sorting import Sorting
 from connection import *
 
 
@@ -47,6 +48,7 @@ class Reservation:
     def initUI(self, win):
         PageController(win, 'SELECT COUNT(*) FROM reservation', self.reservation_table, self.command)
         Search(win, self.command, self.reservation_table, self.fieldsRU, self.fieldsEN)
+        Sorting(win, self.command, self.reservation_table, self.fieldsRU, self.fieldsEN)
 
         self.reservation_table["columns"] = ("1", "2", "3", "4", "5", "6", "7", "8")
         self.reservation_table["show"] = 'headings'

@@ -4,6 +4,7 @@ from tkinter import *
 
 from Search import Search
 from PageController import PageController
+from Sorting import Sorting
 from connection import *
 
 
@@ -11,6 +12,9 @@ class Clients:
     def __init__(self, win):
         self.command = 'SELECT * FROM clients'
         self.client_table = ttk.Treeview(win, height=10)
+
+        self.fieldsRU = ['ФИО', 'Телефон', 'Паспорт']
+        self.fieldsEN = ['name', 'phone', 'passport']
 
         self.AddBtn = Button(win, text='Добавить')
         self.EditBtn = Button(win, text='Редактировать', width=15)
@@ -44,7 +48,8 @@ class Clients:
             self.client_table.insert("", "end", values=row)
 
         PageController(win, 'SELECT COUNT(*) FROM clients', self.client_table, self.command)
-        # Search(win, self.command, self.room_table, self.fields)
+        Search(win, self.command, self.client_table, self.fieldsRU, self.fieldsEN)
+        Sorting(win, self.command, self.client_table, self.fieldsRU, self.fieldsEN)
 
         self.client_table["columns"] = ("1", "2", "3", "4", "5")
         self.client_table["show"] = 'headings'
@@ -69,6 +74,7 @@ class Clients:
         self.ChoiceImage['command'] = self.Browse
 
     def create(self):
+
         self.client_table.grid(row=0, column=1, columnspan=20, sticky='w')
 
         self.l_name.grid(row=3, column=1, sticky='w')

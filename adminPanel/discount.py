@@ -3,6 +3,7 @@ from tkinter import *
 
 from Search import Search
 from PageController import PageController
+from Sorting import Sorting
 from connection import *
 
 
@@ -12,8 +13,8 @@ class Discount():
 
         self.discount_table = ttk.Treeview(win, height=10)
 
-        self.fieldsRU = ['Название', 'Тип', 'Стоимость', 'Кроватей', 'Стоимость завтрака', 'Занят']
-        self.fieldsEN = ['name', 'type', 'cost', 'beds_count', 'breakfast', 'busy']
+        self.fieldsRU = ['Комната', 'Размер скидки']
+        self.fieldsEN = ['room', 'discount']
 
         self.AddBtn = Button(win, text='Добавить')
         self.EditBtn = Button(win, text='Редактировать', width=15)
@@ -30,6 +31,8 @@ class Discount():
 
     def initUI(self, win):
         PageController(win, 'SELECT COUNT(*) FROM discounts', self.discount_table, self.command)
+        Search(win, self.command, self.discount_table, self.fieldsRU, self.fieldsEN)
+        Sorting(win, self.command, self.discount_table, self.fieldsRU, self.fieldsEN)
 
         self.discount_table["columns"] = ("1", "2", "3", "4")
         self.discount_table["show"] = 'headings'

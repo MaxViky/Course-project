@@ -5,14 +5,14 @@ from connection import cur
 
 
 class Search:
-    def __init__(self, win, query, table, filedsRU, filedsEN):
+    def __init__(self, win, query, table, fieldsRU, fieldsEN):
         self.query = query
         self.table = table
-        self.filedsRU = filedsRU
-        self.filedsEN = filedsEN
+        self.fieldsRU = fieldsRU
+        self.fieldsEN = fieldsEN
 
-        self.field1 = ttk.Combobox(win, value=filedsRU)
-        self.field2 = ttk.Combobox(win, value=filedsRU)
+        self.field1 = ttk.Combobox(win, value=fieldsRU)
+        self.field2 = ttk.Combobox(win, value=fieldsRU)
 
         self.str1 = ''
         self.str2 = ''
@@ -33,11 +33,11 @@ class Search:
 
     def search(self, event):
         try:
-            for i in range(0, len(self.filedsRU)):
-                if self.field1.get() == self.filedsRU[i]:
-                    self.str1 = self.filedsEN[i]
-                if self.field2.get() == self.filedsRU[i]:
-                    self.str2 = self.filedsEN[i]
+            for i in range(0, len(self.fieldsRU)):
+                if self.field1.get() == self.fieldsRU[i]:
+                    self.str1 = self.fieldsEN[i]
+                if self.field2.get() == self.fieldsRU[i]:
+                    self.str2 = self.fieldsEN[i]
 
             self.table.delete(*self.table.get_children())
             if self.str2 == '':

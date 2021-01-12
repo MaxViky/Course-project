@@ -3,6 +3,7 @@ from tkinter import *
 
 from Search import Search
 from PageController import PageController
+from Sorting import Sorting
 from connection import *
 
 
@@ -10,6 +11,9 @@ class RoomType:
     def __init__(self, win):
         self.command = 'SELECT * FROM roomtype'
         self.roomtype_table = ttk.Treeview(win, height=10)
+
+        self.fieldsRU = ['Тип', 'Описание']
+        self.fieldsEN = ['type', 'discription']
 
         self.AddBtn = Button(win, text='Добавить')
         self.EditBtn = Button(win, text='Редактировать', width=15)
@@ -25,6 +29,8 @@ class RoomType:
 
     def initUI(self, win):
         PageController(win, 'SELECT COUNT(*) FROM roomtype', self.roomtype_table, self.command)
+        Search(win, self.command, self.roomtype_table, self.fieldsRU, self.fieldsEN)
+        Sorting(win, self.command, self.roomtype_table, self.fieldsRU, self.fieldsEN)
 
         self.roomtype_table["columns"] = ("1", "2", "3")
         self.roomtype_table["show"] = 'headings'
