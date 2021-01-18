@@ -39,8 +39,8 @@ class Room:
 
     def initUI(self, win):
         PageController(win, 'SELECT COUNT(*) FROM rooms', self.room_table, self.command)
-        Search(win, self.command, self.room_table, self.fieldsRU, self.fieldsEN)
-        Sorting(win, self.command, self.room_table, self.fieldsRU, self.fieldsEN)
+        Search(win, self.command, 'SELECT COUNT(*) FROM rooms', self.room_table, self.fieldsRU, self.fieldsEN)
+        Sorting(win, self.command, 'SELECT COUNT(*) FROM rooms', self.room_table, self.fieldsRU, self.fieldsEN)
 
         self.room_table["columns"] = ("1", "2", "3", "4", "5", "6", "7", "8")
         self.room_table["show"] = 'headings'

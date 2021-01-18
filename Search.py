@@ -1,24 +1,27 @@
 from tkinter import ttk
 from tkinter import *
 
+from PageController import PageController
 from connection import cur
 
 
 class Search:
-    def __init__(self, win, query, table, fieldsRU, fieldsEN):
+    def __init__(self, win, query, count, table, fieldsRU, fieldsEN):
+        self.win = win
         self.query = query
         self.table = table
         self.fieldsRU = fieldsRU
         self.fieldsEN = fieldsEN
+        self.count = count
 
-        self.field1 = ttk.Combobox(win, value=fieldsRU)
-        self.field2 = ttk.Combobox(win, value=fieldsRU)
+        self.field1 = ttk.Combobox(self.win, value=fieldsRU)
+        self.field2 = ttk.Combobox(self.win, value=fieldsRU)
 
         self.str1 = ''
         self.str2 = ''
 
-        self.e_search1 = Entry(win)
-        self.e_search2 = Entry(win)
+        self.e_search1 = Entry(self.win)
+        self.e_search2 = Entry(self.win)
 
         self.e_search1.bind('<KeyRelease>', self.search)
         self.e_search2.bind('<KeyRelease>', self.search)
@@ -40,21 +43,17 @@ class Search:
                     self.str2 = self.fieldsEN[i]
 
             self.table.delete(*self.table.get_children())
+
             if self.str2 == '':
-                cur.execute(self.query + ' WHERE [{0}] LIKE "%{1}%" LIMIT 5 OFFSET 0'.format(self.str1, self.e_search1.get()))
-                rows = cur.fetchall()
-                for row in rows:
-                    self.table.insert("", "end", values=row)
+                self.query = self.query + ' WHERE [{0}] LIKE "%{1}%"'.format(self.str1, self.e_search1.get())
+
             elif self.str1 == '':
-                cur.execute(self.query + ' WHERE [{0}] LIKE "%{1}%" LIMIT 5 OFFSET 0'.format(self.str2, self.e_search2.get()))
-                rows = cur.fetchall()
-                for row in rows:
-                    self.table.insert("", "end", values=row)
+                self.query = self.query + ' WHERE [{0}] LIKE "%{1}%"'.format(self.str2, self.e_search2.get())
             else:
-                cur.execute(self.query + ' WHERE [{0}] LIKE "%{1}%" AND [{2}] LIKE "%{3}%" LIMIT 5 OFFSET 0'
-                            .format(self.str1, self.e_search1.get(), self.str2, self.e_search2.get()))
-                rows = cur.fetchall()
-                for row in rows:
-                    self.table.insert("", "end", values=row)
+                self.query = self.query + ' WHERE [{0}] LIKE "%{1}%" AND [{2}] LIKE "%{3}%"'\
+                    .format(self.str1, self.e_search1.get(), self.str2, self.e_search2.get())
+            query = self.query
+
+            PageController(self.win, self.count, self.table, query)
         except:
             pass

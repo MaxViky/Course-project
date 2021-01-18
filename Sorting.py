@@ -1,14 +1,18 @@
 from tkinter import ttk, END
 
+from PageController import PageController
 from connection import cur
 
 
 class Sorting():
-    def __init__(self, win, query, table, fieldRU, fieldEN):
-        self.query = query
+    def __init__(self, win, query, count, table, fieldRU, fieldEN):
+        self.win = win
+        self.queryOld = query
+        self.queryNew = query
         self.table = table
         self.fieldsRU = fieldRU
         self.fieldsEN = fieldEN
+        self.count = count
 
         self.fieldsRU.append('Отмена')
         self.fieldsEN.append('Отмена')
@@ -24,22 +28,22 @@ class Sorting():
 
     def sort(self, event):
         try:
-
+            self.table.delete(*self.table.get_children())
             for i in range(0, len(self.fieldsRU)):
                 if self.combosorting.get() == self.fieldsRU[i]:
                     self.field = self.fieldsEN[i]
             if self.field != 'Отмена':
-                self.table.delete(*self.table.get_children())
-                cur.execute(self.query + ' ORDER BY {0} LIMIT 5 OFFSET 0 '.format(self.field))
-                rows = cur.fetchall()
-                for row in rows:
-                    self.table.insert("", "end", values=row)
+                self.query = self.query + ' ORDER BY {0} '.format(self.field)
             else:
-                self.table.delete(*self.table.get_children())
-                cur.execute(self.query + ' LIMIT 5 OFFSET 0')
-                rows = cur.fetchall()
-                for row in rows:
-                    self.table.insert("", "end", values=row)
+                cur.execute(self.query)
                 self.combosorting.delete(0, END)
+
+            query = self.query
+
+            cur.execute(query + ' LIMIT 5 OFFSET 0')
+            rows = cur.fetchall()
+            for row in rows:
+                self.table.insert("", "end", values=row)
         except:
             pass
+        return query

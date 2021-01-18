@@ -6,6 +6,7 @@ from adminPanel.discount import Discount
 from adminPanel.reservation import Reservation
 from adminPanel.room import Room
 from adminPanel.type import RoomType
+from adminPanel.users import Users
 from connection import cur, conn
 
 
@@ -90,7 +91,13 @@ class AdminMenu:
         self.discount.create()
 
     def CreateUser(self):
-        pass
+        try:
+            for widget in self.frame.winfo_children():
+                widget.destroy()
+        except:
+            pass
+        self.user = Users(self.frame)
+        self.user.create()
 
 
 AdminMenu()

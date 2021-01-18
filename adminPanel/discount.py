@@ -9,7 +9,8 @@ from connection import *
 
 class Discount():
     def __init__(self, win):
-        self.command = 'SELECT * FROM discounts'
+        self.command = "SELECT discounts.id, room, name, discount FROM discounts INNER JOIN rooms " \
+                       "on discounts.room = rooms.id"
 
         self.discount_table = ttk.Treeview(win, height=10)
 
@@ -47,6 +48,8 @@ class Discount():
         self.discount_table.heading("3", text="Название")
         self.discount_table.heading("4", text="Скидка")
 
+        self.discount_table.bind('<ButtonRelease>', self.fillField)
+
         self.AddBtn['command'] = self.Add
         self.EditBtn['command'] = self.Update
         self.DeleteBtn['command'] = self.Delete
@@ -72,71 +75,68 @@ class Discount():
 
     def Add(self):
         try:
-            type = self.e_type.get().split(" - ")[0]
-            busy = self.e_busy.selection_get()
+            room = self.e_room.get().split(" - ")[0]
 
-            if busy == 'Да':
-                busy = 1
-            else:
-                busy = 0
-
-            command = "INSERT INTO rooms VALUES(Null, '{0}', {1}, {2}, {3}, {4}, {5}, '{6}')".format(
-                self.e_name.get(), type, self.e_cost.get(),
-                self.e_beds.get(), self.e_breakfast.get(), busy, self.e_photo.get()
+            command = "INSERT INTO discounts VALUES(Null, {0}, {1})".format(
+                room, self.e_discount.get()
             )
             cur.execute(command)
             conn.commit()
 
-            self.room_table.delete(*self.room_table.get_children())
+            self.discount_table.delete(*self.discount_table.get_children())
 
-            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
+            cur.execute(self.command + " LIMIT 5 OFFSET 0")
             rows = cur.fetchall()
             for row in rows:
-                self.room_table.insert("", "end", values=row)
+                self.discount_table.insert("", "end", values=row)
         except:
             messagebox.showinfo('Ошибка', 'Не удалось добавить данные')
 
     def Update(self):
         try:
-            type = self.e_type.get().split(" - ")[0]
+            room = self.e_room.get().split(" - ")[0]
 
-            busy = self.e_busy.selection_get()
-
-            if busy == 'Да':
-                busy = 1
-            else:
-                busy = 0
-
-            _id = self.room_table.item(self.room_table.selection(), 'values')[0]
-            command = "UPDATE rooms SET " \
-                      "name='{0}', type={1}, cost={2}, bed_count={3}, breakfast={4}, busy={5}, photo='{6}' WHERE id={7}".format(
-                self.e_name.get(), type, self.e_cost.get(),
-                self.e_beds.get(), self.e_breakfast.get(), busy, self.e_photo.get(), _id
+            _id = self.discount_table.item(self.discount_table.selection(), 'values')[0]
+            command = "UPDATE discounts SET " \
+                      "room={0}, discount={1} WHERE id={2}".format(
+                room, self.e_discount.get(), _id
             )
             cur.execute(command)
 
-            self.room_table.delete(*self.room_table.get_children())
+            self.discount_table.delete(*self.discount_table.get_children())
 
-            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
+            cur.execute(self.command + " LIMIT 5 OFFSET 0")
             rows = cur.fetchall()
             for row in rows:
-                self.room_table.insert("", "end", values=row)
+                self.discount_table.insert("", "end", values=row)
 
         except:
             messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
         conn.commit()
 
     def Delete(self):
-        _id = self.room_table.item(self.room_table.selection(), 'values')[0]
-        command = "DELETE FROM rooms WHERE id={0}".format(_id)
+        _id = self.discount_table.item(self.discount_table.selection(), 'values')[0]
+        command = "DELETE FROM discounts WHERE id={0}".format(_id)
         try:
             cur.execute(command)
-
-            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
+            cur.execute(self.command + " LIMIT 5 OFFSET 0")
             rows = cur.fetchall()
             for row in rows:
-                self.room_table.insert("", "end", values=row)
+                self.discount_table.insert("", "end", values=row)
 
         except:
             messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
         conn.commit()
+
+    def fillField(self, event):
+        try:
+            self.e_room.delete(0, END)
+            self.e_discount.delete(0, END)
+
+            _id = self.discount_table.item(self.discount_table.selection(), 'values')[0]
+            list = cur.execute('SELECT * FROM discounts WHERE id={0}'.format(_id)).fetchone()
+
+            self.e_room.insert(0, list[1])
+            self.e_discount.insert(0, list[2])
+        except:
+            pass
