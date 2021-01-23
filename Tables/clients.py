@@ -1,10 +1,7 @@
 import sqlite3 as sql
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
-
-from Search import Search
-from PageController import PageController
-from Sorting import Sorting
+from UI import UI
 from connection import *
 
 
@@ -42,15 +39,12 @@ class Clients:
         self.initUI(win)
 
     def initUI(self, win):
+        UI(win, self.command, 'SELECT COUNT(*) FROM clients', self.client_table, self.fieldsRU, self.fieldsEN)
+
         cur.execute("SELECT * FROM clients LIMIT 5 OFFSET 0")
         rows = cur.fetchall()
         for row in rows:
             self.client_table.insert("", "end", values=row)
-
-        PageController(win, 'SELECT COUNT(*) FROM clients', self.client_table, self.command)
-        Search(win, self.command, self.client_table, self.fieldsRU, self.fieldsEN)
-        Sorting(win, self.command, self.client_table, self.fieldsRU, self.fieldsEN)
-
         self.client_table["columns"] = ("1", "2", "3", "4", "5")
         self.client_table["show"] = 'headings'
 

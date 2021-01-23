@@ -1,12 +1,12 @@
 from datetime import datetime
 from tkinter import *
 
-from adminPanel.clients import Clients
-from adminPanel.discount import Discount
-from adminPanel.reservation import Reservation
-from adminPanel.room import Room
-from adminPanel.type import RoomType
-from adminPanel.users import Users
+from Tables.clients import Clients
+from Tables.discount import Discount
+from Tables.reservation import Reservation
+from Tables.room import Room
+from Tables.type import RoomType
+from Tables.users import Users
 from connection import cur, conn
 
 

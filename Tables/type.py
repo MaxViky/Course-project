@@ -1,9 +1,7 @@
 from tkinter import ttk, messagebox
 from tkinter import *
 
-from Search import Search
-from PageController import PageController
-from Sorting import Sorting
+from UI import UI
 from connection import *
 
 
@@ -28,9 +26,7 @@ class RoomType:
         self.initUI(win)
 
     def initUI(self, win):
-        PageController(win, 'SELECT COUNT(*) FROM roomtype', self.roomtype_table, self.command)
-        Search(win, self.command, self.roomtype_table, self.fieldsRU, self.fieldsEN)
-        Sorting(win, self.command, self.roomtype_table, self.fieldsRU, self.fieldsEN)
+        UI(win, self.command, 'SELECT COUNT(*) FROM roomtype', self.roomtype_table, self.fieldsRU, self.fieldsEN)
 
         self.roomtype_table["columns"] = ("1", "2", "3")
         self.roomtype_table["show"] = 'headings'

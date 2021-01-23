@@ -1,9 +1,7 @@
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
 
-from Search import Search
-from PageController import PageController
-from Sorting import Sorting
+from UI import UI
 from connection import *
 
 
@@ -31,9 +29,7 @@ class Discount():
         self.initUI(win)
 
     def initUI(self, win):
-        PageController(win, 'SELECT COUNT(*) FROM discounts', self.discount_table, self.command)
-        Search(win, self.command, self.discount_table, self.fieldsRU, self.fieldsEN)
-        Sorting(win, self.command, self.discount_table, self.fieldsRU, self.fieldsEN)
+        UI(win, self.command, 'SELECT COUNT(*) FROM discounts', self.discount_table, self.fieldsRU, self.fieldsEN)
 
         self.discount_table["columns"] = ("1", "2", "3", "4")
         self.discount_table["show"] = 'headings'

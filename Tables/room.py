@@ -1,10 +1,9 @@
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
 
-from Search import Search
-from PageController import PageController
-from Sorting import Sorting
+from UI import UI
 from connection import *
+from tableInfo.roomInfo import RoomInfo
 
 
 class Room:
@@ -38,9 +37,7 @@ class Room:
         self.initUI(win)
 
     def initUI(self, win):
-        PageController(win, 'SELECT COUNT(*) FROM rooms', self.room_table, self.command)
-        Search(win, self.command, 'SELECT COUNT(*) FROM rooms', self.room_table, self.fieldsRU, self.fieldsEN)
-        Sorting(win, self.command, 'SELECT COUNT(*) FROM rooms', self.room_table, self.fieldsRU, self.fieldsEN)
+        UI(win, self.command, 'SELECT COUNT(*) FROM rooms', self.room_table, self.fieldsRU, self.fieldsEN)
 
         self.room_table["columns"] = ("1", "2", "3", "4", "5", "6", "7", "8")
         self.room_table["show"] = 'headings'
@@ -64,6 +61,7 @@ class Room:
         self.room_table.heading("8", text="Фото")
 
         self.room_table.bind('<ButtonRelease>', self.fillField)
+        self.room_table.bind('<Double-Button-1>', self.showInfo)
 
         cur.execute('SELECT id, type FROM roomtype')
         self.e_type.configure(values=["{} - {}".format(*row) for row in cur.fetchall()])
@@ -202,3 +200,8 @@ class Room:
             self.e_photo.insert(0, list[7])
         except:
             pass
+
+    def showInfo(self, event):
+        _id = self.room_table.item(self.room_table.selection(), 'values')[0]
+        list = cur.execute('SELECT * FROM rooms WHERE id={0}'.format(_id)).fetchone()
+        RoomInfo(list[1], list[2], list[3], list[4], list[5], list[6], list[7])
