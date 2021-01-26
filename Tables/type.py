@@ -101,13 +101,17 @@ class RoomType:
         conn.commit()
 
     def Delete(self):
-        _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
-        command = "DELETE FROM roomtype WHERE id={0}".format(_id)
-        try:
-            cur.execute(command)
-        except:
-            messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
-        conn.commit()
+        answer = messagebox.askyesno(
+            title="Удаление",
+            message="Удалить тип комнаты?")
+        if answer:
+            _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
+            command = "DELETE FROM roomtype WHERE id={0}".format(_id)
+            try:
+                cur.execute(command)
+            except:
+                messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
+            conn.commit()
 
     def fillField(self, event):
 
@@ -115,8 +119,8 @@ class RoomType:
         self.e_description.delete(0, END)
 
         _id = self.roomtype_table.item(self.roomtype_table.selection(), 'values')[0]
-        list = cur.execute('SELECT * FROM roomtype WHERE id={0}'.format(_id)).fetchone()
-
+        cur.execute('SELECT * FROM roomtype WHERE id={0}'.format(_id))
+        list = cur.fetchone()
         self.e_name.insert(0, list[1])
         self.e_description.insert(0, list[2])
 

@@ -123,19 +123,24 @@ class Clients:
         conn.commit()
 
     def Delete(self):
-        _id = self.client_table.item(self.client_table.selection(), 'values')[0]
-        command = "DELETE FROM clients WHERE id={0}".format(_id)
-        try:
-            cur.execute(command)
-            conn.commit()
+        answer = messagebox.askyesno(
+            title="Удаление",
+            message="Удалить клиента?")
+        if answer:
+            _id = self.client_table.item(self.client_table.selection(), 'values')[0]
+            command = "DELETE FROM clients WHERE id={0}".format(_id)
+            try:
+                cur.execute(command)
+                conn.commit()
 
-            self.client_table.delete(*self.client_table.get_children())
-            cur.execute("SELECT * FROM clients LIMIT 5 OFFSET 0")
-            rows = cur.fetchall()
-            for row in rows:
-                self.client_table.insert("", "end", values=row)
-        except:
-            messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
+                self.client_table.delete(*self.client_table.get_children())
+
+                cur.execute("SELECT * FROM clients LIMIT 5 OFFSET 0")
+                rows = cur.fetchall()
+                for row in rows:
+                    self.client_table.insert("", "end", values=row)
+            except:
+                messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
 
     def Browse(self):
         file = filedialog.askopenfilename()
@@ -172,8 +177,8 @@ class Clients:
             self.e_photo.delete(0, END)
 
             _id = self.client_table.item(self.client_table.selection(), 'values')[0]
-            list = cur.execute('SELECT * FROM clients WHERE id={0}'.format(_id)).fetchone()
-
+            cur.execute('SELECT * FROM clients WHERE id={0}'.format(_id)).fetchone()
+            list = cur.fetchone()
             self.e_name.insert(0, list[1])
             self.e_phone.insert(0, list[2])
             self.e_passport.insert(0, list[3])

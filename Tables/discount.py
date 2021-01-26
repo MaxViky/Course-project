@@ -111,18 +111,23 @@ class Discount():
         conn.commit()
 
     def Delete(self):
-        _id = self.discount_table.item(self.discount_table.selection(), 'values')[0]
-        command = "DELETE FROM discounts WHERE id={0}".format(_id)
-        try:
-            cur.execute(command)
-            cur.execute(self.command + " LIMIT 5 OFFSET 0")
-            rows = cur.fetchall()
-            for row in rows:
-                self.discount_table.insert("", "end", values=row)
+        answer = messagebox.askyesno(
+            title="Удаление",
+            message="Удалить скидку?")
+        if answer:
+            _id = self.discount_table.item(self.discount_table.selection(), 'values')[0]
+            command = "DELETE FROM discounts WHERE id={0}".format(_id)
+            try:
+                cur.execute(command)
+                self.discount_table.delete(*self.discount_table.get_children())
+                cur.execute(self.command + " LIMIT 5 OFFSET 0")
+                rows = cur.fetchall()
+                for row in rows:
+                    self.discount_table.insert("", "end", values=row)
 
-        except:
-            messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
-        conn.commit()
+            except:
+                messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
+            conn.commit()
 
     def fillField(self, event):
         try:
@@ -130,8 +135,8 @@ class Discount():
             self.e_discount.delete(0, END)
 
             _id = self.discount_table.item(self.discount_table.selection(), 'values')[0]
-            list = cur.execute('SELECT * FROM discounts WHERE id={0}'.format(_id)).fetchone()
-
+            cur.execute('SELECT * FROM discounts WHERE id={0}'.format(_id))
+            list = cur.fetchone()
             self.e_room.insert(0, list[1])
             self.e_discount.insert(0, list[2])
         except:

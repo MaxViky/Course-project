@@ -73,7 +73,6 @@ class Room:
         self.DeleteBtn['command'] = self.Delete
         self.ChoiceImage['command'] = self.Browse
 
-    def create(self):
         cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
         rows = cur.fetchall()
         for row in rows:
@@ -81,6 +80,7 @@ class Room:
 
         self.room_table.grid(row=0, column=1, columnspan=20, sticky='w')
 
+    def create(self):
         self.l_name.grid(row=3, column=1, sticky='w')
         self.l_type.grid(row=4, column=1, sticky='w')
         self.l_cost.grid(row=5, column=1, sticky='w')
@@ -105,7 +105,10 @@ class Room:
     def Add(self):
         try:
             type = self.e_type.get().split(" - ")[0]
-            busy = self.e_busy.selection_get()
+            busy = self.e_busy.get()
+            photo = self.e_photo.get()
+
+
 
             if busy == 'Да':
                 busy = 1
@@ -132,7 +135,7 @@ class Room:
         try:
             type = self.e_type.get().split(" - ")[0]
 
-            busy = self.e_busy.selection_get()
+            busy = self.e_busy.get()
 
             if busy == 'Да':
                 busy = 1
@@ -159,19 +162,25 @@ class Room:
         conn.commit()
 
     def Delete(self):
-        _id = self.room_table.item(self.room_table.selection(), 'values')[0]
-        command = "DELETE FROM rooms WHERE id={0}".format(_id)
-        try:
-            cur.execute(command)
+        answer = messagebox.askyesno(
+            title="Удаление",
+            message="Удалить комнату?")
+        if answer:
+            _id = self.room_table.item(self.room_table.selection(), 'values')[0]
+            command = "DELETE FROM rooms WHERE id={0}".format(_id)
+            try:
+                cur.execute(command)
 
-            cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
-            rows = cur.fetchall()
-            for row in rows:
-                self.room_table.insert("", "end", values=row)
+                self.room_table.delete(*self.room_table.get_children())
 
-        except:
-            messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
-        conn.commit()
+                cur.execute("SELECT * FROM rooms LIMIT 5 OFFSET 0")
+                rows = cur.fetchall()
+                for row in rows:
+                    self.room_table.insert("", "end", values=row)
+
+            except:
+                messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
+            conn.commit()
 
     def Browse(self):
         file = filedialog.askopenfilename()
@@ -189,14 +198,18 @@ class Room:
             self.e_photo.delete(0, END)
 
             _id = self.room_table.item(self.room_table.selection(), 'values')[0]
-            list = cur.execute('SELECT * FROM rooms WHERE id={0}'.format(_id)).fetchone()
+            cur.execute('SELECT * FROM rooms WHERE id={0}'.format(_id))
+            list = cur.fetchone()
 
             self.e_name.insert(0, list[1])
             self.e_type.insert(0, list[2])
             self.e_cost.insert(0, list[3])
             self.e_beds.insert(0, list[4])
             self.e_breakfast.insert(0, list[5])
-            self.e_busy.insert(0, list[6])
+            if list[6] == 1:
+                self.e_busy.insert(0, 'Да')
+            else:
+                self.e_busy.insert(0, 'Нет')
             self.e_photo.insert(0, list[7])
         except:
             pass

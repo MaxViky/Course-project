@@ -1,6 +1,7 @@
 from datetime import datetime
 from tkinter import *
 
+from Revenue import Revenue
 from Tables.clients import Clients
 from Tables.discount import Discount
 from Tables.reservation import Reservation
@@ -31,17 +32,19 @@ class AdminMenu:
         file_menu.add_separator()
 
         menu.add_cascade(label="Таблицы", menu=file_menu)
-        menu.add_cascade(label="Информация")
+        menu.add_cascade(label='Прибыль', command=self.CreateRevenue)
         self.win.configure(menu=menu)
         self.frame.grid(row=0, column=0)
 
         now = datetime.now().date().strftime('%d.%m.%Y')
-        cur.execute('SELECT room, departure_date FROM reservation')
+        cur.execute('SELECT room, arrival_date, departure_date FROM reservation')
         date = cur.fetchall()
         for i in date:
-            if i[1] < now:
+            if i[1] < now < i[2]:
+                cur.execute('UPDATE rooms SET busy = 1 WHERE id={0}'.format(i[0]))
+            else:
                 cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(i[0]))
-                conn.commit()
+        conn.commit()
 
         self.win.mainloop()
 
@@ -99,5 +102,9 @@ class AdminMenu:
         self.user = Users(self.frame)
         self.user.create()
 
+    def CreateRevenue(self):
+        revenue = Revenue()
+        revenue.MonthlyRevenue()
 
-AdminMenu()
+
+# AdminMenu()

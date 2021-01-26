@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from AdminPanel import AdminMenu
+from ManagerPanel import ManagerPanel
 from connection import *
 from authorization.regForm import Reg
 
@@ -44,7 +45,10 @@ class Login:
             messagebox.showinfo('Ошибка', 'Неверный логин или пароль.')
         else:
             self.window.destroy()
-            AdminMenu()
+            if user[0][2] == 'admin':
+                AdminMenu()
+            else:
+                ManagerPanel()
 
     def Reg(self):
         reg = Reg()

@@ -18,7 +18,7 @@ class Users:
     def initUI(self, win):
         UI(win, self.command, 'SELECT COUNT(*) FROM users', self.users_table, self.fieldsRU, self.fieldsEN)
 
-        cur.execute("SELECT * FROM users LIMIT 5 OFFSET 0")
+        cur.execute("SELECT id, username, role FROM users LIMIT 5 OFFSET 0")
         rows = cur.fetchall()
         for row in rows:
             self.users_table.insert("", "end", values=row)

@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="acd23832-e47a-4af2-be81-e81d8acebfdf" name="Default Changelist" comment="add usertable">
-      <change afterPath="$PROJECT_DIR$/UI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tableInfo/roomInfo.py" afterDir="false" />
+    <list default="true" id="acd23832-e47a-4af2-be81-e81d8acebfdf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Revenue.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Templates/Квитанция.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AdminPanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/AdminPanel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PageController.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Search.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sorting.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/Info.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/Info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/asdasda.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/asdasda.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/clients.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/clients.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/discount.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/discount.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/reservation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/reservation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/room.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/type.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/type.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adminPanel/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ManagerPanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/ManagerPanel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/clients.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/clients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/discount.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/discount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/reservation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/reservation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/room.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/room.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/type.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/type.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI.py" beforeDir="false" afterPath="$PROJECT_DIR$/UI.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorization/loginForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/authorization/loginForm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/hostels.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/hostels.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,20 +53,21 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Documents" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\Projects\Курсовая 2020-2021\Hostel" />
-      <recent name="C:\Users\student\Documents\Course-project-master\adminPanel" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\student\Documents\Course-project-master\authorization" />
       <recent name="E:\Projects\Курсовая 2020-2021\Hostel\database" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Projects\Курсовая 2020-2021\Hostel\Documents" />
+      <recent name="E:\Projects\Курсовая 2020-2021\Hostel" />
+      <recent name="C:\Users\student\Documents\Course-project-master\adminPanel" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.AdminPanel">
+  <component name="RunManager" selected="Python.main">
     <configuration name="AdminPanel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hostel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,6 +110,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Revenue" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Hostel" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Revenue.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="asdasda" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hostel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -123,27 +144,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/adminPanel/asdasda.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="loginForm (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Hostel" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/authorization" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/authorization/loginForm.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -195,20 +195,20 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.main" />
       <item itemvalue="Python.AdminPanel" />
       <item itemvalue="Python.Info (1)" />
       <item itemvalue="Python.asdasda" />
-      <item itemvalue="Python.loginForm (1)" />
-      <item itemvalue="Python.main" />
       <item itemvalue="Python.roomInfo" />
+      <item itemvalue="Python.Revenue" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Revenue" />
         <item itemvalue="Python.AdminPanel" />
         <item itemvalue="Python.roomInfo" />
         <item itemvalue="Python.asdasda" />
         <item itemvalue="Python.Info (1)" />
-        <item itemvalue="Python.loginForm (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610994349312</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="initial commit">
+      <created>1611377351316</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1611377351316</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -308,7 +315,8 @@
     <MESSAGE value="Update" />
     <MESSAGE value="add sort" />
     <MESSAGE value="add usertable" />
-    <option name="LAST_COMMIT_MESSAGE" value="add usertable" />
+    <MESSAGE value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="312" y="88" key="#Inspections" timestamp="1609938740370">
@@ -328,53 +336,53 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="450" y="176" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.860@0.0.1440.860" timestamp="1610995791343" />
-    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2" timestamp="1610994373873">
+    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2" timestamp="1611377346691">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1610994373873" />
+    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1611377346691" />
     <state x="500" y="184" key="FileChooserDialogImpl" timestamp="1609959192667">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="500" y="184" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1609959192667" />
-    <state width="709" height="223" key="GridCell.Tab.0.bottom" timestamp="1610998588857">
+    <state width="709" height="223" key="GridCell.Tab.0.bottom" timestamp="1611636594093">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1610998588857" />
+    <state width="709" height="223" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1611636594093" />
     <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="709" height="223" key="GridCell.Tab.0.center" timestamp="1610998588857">
+    <state width="709" height="223" key="GridCell.Tab.0.center" timestamp="1611636594093">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1610998588857" />
+    <state width="709" height="223" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1611636594093" />
     <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="709" height="223" key="GridCell.Tab.0.left" timestamp="1610998588857">
+    <state width="709" height="223" key="GridCell.Tab.0.left" timestamp="1611636594093">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1610998588857" />
+    <state width="709" height="223" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1611636594093" />
     <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="709" height="223" key="GridCell.Tab.0.right" timestamp="1610998588857">
+    <state width="709" height="223" key="GridCell.Tab.0.right" timestamp="1611636594093">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="709" height="223" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1610998588857" />
+    <state width="709" height="223" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1611636594093" />
     <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="276" key="GridCell.Tab.1.bottom" timestamp="1610365495387">
+    <state width="709" height="276" key="GridCell.Tab.1.bottom" timestamp="1611490437198">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.bottom/0.0.1440.860@0.0.1440.860" timestamp="1610365495387" />
+    <state width="709" height="276" key="GridCell.Tab.1.bottom/0.0.1440.860@0.0.1440.860" timestamp="1611490437198" />
     <state width="1899" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="276" key="GridCell.Tab.1.center" timestamp="1610365495387">
+    <state width="709" height="276" key="GridCell.Tab.1.center" timestamp="1611490437198">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.center/0.0.1440.860@0.0.1440.860" timestamp="1610365495387" />
+    <state width="709" height="276" key="GridCell.Tab.1.center/0.0.1440.860@0.0.1440.860" timestamp="1611490437198" />
     <state width="1899" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="276" key="GridCell.Tab.1.left" timestamp="1610365495387">
+    <state width="709" height="276" key="GridCell.Tab.1.left" timestamp="1611490437198">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.left/0.0.1440.860@0.0.1440.860" timestamp="1610365495387" />
+    <state width="709" height="276" key="GridCell.Tab.1.left/0.0.1440.860@0.0.1440.860" timestamp="1611490437198" />
     <state width="1899" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="276" key="GridCell.Tab.1.right" timestamp="1610365495387">
+    <state width="709" height="276" key="GridCell.Tab.1.right" timestamp="1611490437198">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="276" key="GridCell.Tab.1.right/0.0.1440.860@0.0.1440.860" timestamp="1610365495387" />
+    <state width="709" height="276" key="GridCell.Tab.1.right/0.0.1440.860@0.0.1440.860" timestamp="1611490437198" />
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
     <state x="346" y="136" key="SettingsEditor" timestamp="1609684513981">
       <screen x="0" y="0" width="1440" height="860" />
@@ -385,14 +393,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="790" y="389" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609137069856" />
-    <state x="324" y="107" key="Vcs.Push.Dialog.v2" timestamp="1610994387203">
+    <state x="324" y="107" key="Vcs.Push.Dialog.v2" timestamp="1611377360282">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="324" y="107" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1610994387203" />
-    <state x="415" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1611377288892">
+    <state x="324" y="107" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1611377360282" />
+    <state x="415" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1611634963035">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="415" y="253" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1611377288892" />
+    <state x="415" y="253" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1611634963035" />
     <state x="517" y="221" key="git4idea.merge.GitMergeDialog" timestamp="1608959428036">
       <screen x="0" y="0" width="1440" height="860" />
     </state>

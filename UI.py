@@ -29,8 +29,8 @@ class UI():
 
         self.note = 0
         self.page = 1
-
-        self.pageCount = math.ceil(cur.execute(self.count).fetchone()[0] / 5)
+        cur.execute(self.count)
+        self.pageCount = math.ceil(cur.fetchone()[0]/5)
         self.nextPage = Button(win, text='->')
         self.previousPage = Button(win, text='<-')
 
@@ -62,7 +62,6 @@ class UI():
         self.previousPage.grid(row=1, column=3)
 
     def sort(self, event):
-
         try:
             self.query = self.command
             self.table.delete(*self.table.get_children())
@@ -78,7 +77,6 @@ class UI():
             rows = cur.fetchall()
             for row in rows:
                 self.table.insert("", "end", values=row)
-            self.combosorting.delete(0, END)
         except:
             pass
 
@@ -91,13 +89,14 @@ class UI():
                     self.str2 = self.fieldsEN[i]
 
             self.table.delete(*self.table.get_children())
+
             self.query = self.command
             if self.str2 == '':
-                self.query += ' WHERE [{0}] LIKE "%{1}%"'.format(self.str1, self.e_search1.get())
+                self.query += ' WHERE {0} LIKE "%{1}%"'.format(self.str1, self.e_search1.get())
             elif self.str1 == '':
-                self.query += ' WHERE [{0}] LIKE "%{1}%"'.format(self.str2, self.e_search2.get())
+                self.query += ' WHERE {0} LIKE "%{1}%"'.format(self.str2, self.e_search2.get())
             else:
-                self.query += ' WHERE [{0}] LIKE "%{1}%" AND [{2}] LIKE "%{3}%"'\
+                self.query += ' WHERE {0} LIKE "%{1}%" AND [{2}] LIKE "%{3}%"'\
                             .format(self.str1, self.e_search1.get(), self.str2, self.e_search2.get())
             cur.execute(self.query + 'LIMIT 5 OFFSET 0')
             rows = cur.fetchall()
