@@ -107,4 +107,4 @@ class AdminMenu:
         revenue.MonthlyRevenue()
 
 
-# AdminMenu()
+AdminMenu()

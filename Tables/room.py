@@ -1,9 +1,11 @@
+import os
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
 
 from UI import UI
 from connection import *
 from tableInfo.roomInfo import RoomInfo
+from PIL import Image
 
 
 class Room:
@@ -108,7 +110,11 @@ class Room:
             busy = self.e_busy.get()
             photo = self.e_photo.get()
 
-
+            image = Image.open(photo)
+            imageName = os.path.basename(photo)
+            imagePath = 'Images/Hotels/{0}'.format(imageName)
+            image = image.resize((300, 200), Image.ANTIALIAS)
+            image.save(imagePath, "JPEG")
 
             if busy == 'Да':
                 busy = 1
@@ -117,7 +123,7 @@ class Room:
 
             command = "INSERT INTO rooms VALUES(Null, '{0}', {1}, {2}, {3}, {4}, {5}, '{6}')".format(
                 self.e_name.get(), type, self.e_cost.get(),
-                self.e_beds.get(), self.e_breakfast.get(), busy, self.e_photo.get()
+                self.e_beds.get(), self.e_breakfast.get(), busy, imagePath
             )
             cur.execute(command)
             conn.commit()
@@ -135,6 +141,14 @@ class Room:
         try:
             type = self.e_type.get().split(" - ")[0]
 
+            photo = self.e_photo.get()
+
+            image = Image.open(photo)
+            imageName = os.path.basename(photo)
+            imagePath = 'Images/Hotels/{0}'.format(imageName)
+            image = image.resize((300, 200), Image.ANTIALIAS)
+            image.save(imagePath, "JPEG")
+
             busy = self.e_busy.get()
 
             if busy == 'Да':
@@ -146,7 +160,7 @@ class Room:
             command = "UPDATE rooms SET " \
                       "name='{0}', type={1}, cost={2}, bed_count={3}, breakfast={4}, busy={5}, photo='{6}' WHERE id={7}".format(
                 self.e_name.get(), type, self.e_cost.get(),
-                self.e_beds.get(), self.e_breakfast.get(), busy, self.e_photo.get(), _id
+                self.e_beds.get(), self.e_breakfast.get(), busy, imagePath, _id
             )
             cur.execute(command)
 
@@ -216,5 +230,6 @@ class Room:
 
     def showInfo(self, event):
         _id = self.room_table.item(self.room_table.selection(), 'values')[0]
-        list = cur.execute('SELECT * FROM rooms WHERE id={0}'.format(_id)).fetchone()
-        RoomInfo(list[1], list[2], list[3], list[4], list[5], list[6], list[7])
+        cur.execute('SELECT * FROM rooms WHERE id={0}'.format(_id))
+        list = cur.fetchone()
+        RoomInfo(_id, list[1], list[2], list[3], list[4], list[5], list[6], list[7])

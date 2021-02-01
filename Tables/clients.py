@@ -1,8 +1,12 @@
+import os
 import sqlite3 as sql
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
 from UI import UI
 from connection import *
+from PIL import Image
+
+from tableInfo.clientInfo import ClientInfo
 
 
 class Clients:
@@ -61,6 +65,7 @@ class Clients:
         self.client_table.heading("5", text="Фото")
 
         self.client_table.bind('<ButtonRelease>', self.fillField)
+        self.client_table.bind('<Double-Button-1>', self.showInfo)
 
         self.AddBtn['command'] = self.Add
         self.EditBtn['command'] = self.Update
@@ -88,8 +93,16 @@ class Clients:
 
     def Add(self):
         try:
+            file = self.e_photo.get()
+            image = Image.open(file)
+            imageName = os.path.basename(file)
+            imagePath = 'Images/Clients/{0}'.format(imageName)
+            image = image.resize((300, 200), Image.ANTIALIAS)
+
+            image.save(imagePath, "JPEG")
+
             command = "INSERT INTO clients VALUES(Null, '{0}', '{1}', '{2}', '{3}')".format(
-                self.e_name.get(), self.e_phone.get(), self.e_passport.get(), self.e_photo.get()
+                self.e_name.get(), self.e_phone.get(), self.e_passport.get(), imagePath
             )
             cur.execute(command)
             conn.commit()
@@ -104,9 +117,18 @@ class Clients:
 
     def Update(self):
         _id = self.client_table.item(self.client_table.selection(), 'values')[0]
+
+        file = self.e_photo.get()
+        image = Image.open(file)
+        imageName = os.path.basename(file)
+        imagePath = 'Images/Clients/{0}'.format(imageName)
+        image = image.resize((300, 200), Image.ANTIALIAS)
+
+        image.save(imagePath, "JPEG")
+
         command = "UPDATE clients SET "\
                   "name='{0}', phone='{1}', passport='{2}', photo='{3}' WHERE id={4}".format(
-            self.e_name.get(), self.e_phone.get(), self.e_passport.get(), self.e_photo.get(), _id
+            self.e_name.get(), self.e_phone.get(), self.e_passport.get(), imagePath, _id
         )
         try:
             cur.execute(command)
@@ -177,7 +199,7 @@ class Clients:
             self.e_photo.delete(0, END)
 
             _id = self.client_table.item(self.client_table.selection(), 'values')[0]
-            cur.execute('SELECT * FROM clients WHERE id={0}'.format(_id)).fetchone()
+            cur.execute('SELECT * FROM clients WHERE id={0}'.format(_id))
             list = cur.fetchone()
             self.e_name.insert(0, list[1])
             self.e_phone.insert(0, list[2])
@@ -186,3 +208,6 @@ class Clients:
         except:
             pass
 
+    def showInfo(self, event):
+        list = self.client_table.item(self.client_table.selection(), 'values')
+        ClientInfo(list[0], list[1], list[2], list[3], list[4])
