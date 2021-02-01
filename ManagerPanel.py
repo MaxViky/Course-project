@@ -1,6 +1,7 @@
 from datetime import datetime
 from tkinter import *
 
+from Revenue import Revenue
 from Tables.clients import Clients
 from Tables.discount import Discount
 from Tables.reservation import Reservation
@@ -28,6 +29,7 @@ class ManagerPanel:
         file_menu.add_separator()
 
         menu.add_cascade(label="Таблицы", menu=file_menu)
+        menu.add_cascade(label='Прибыль', command=self.CreateRevenue)
         self.win.configure(menu=menu)
         self.frame.grid(row=0, column=0)
 
@@ -66,3 +68,7 @@ class ManagerPanel:
             pass
         self.reservation = Reservation(self.frame)
         self.reservation.create()
+
+    def CreateRevenue(self):
+        revenue = Revenue()
+        revenue.MonthlyRevenue()

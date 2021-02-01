@@ -105,6 +105,3 @@ class AdminMenu:
     def CreateRevenue(self):
         revenue = Revenue()
         revenue.MonthlyRevenue()
-
-
-AdminMenu()

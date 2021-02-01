@@ -45,7 +45,7 @@ class ClientInfo():
             image = Image.open(file)
             imageName = os.path.basename(file)
             imagePath = 'Images/Clients/{0}'.format(imageName)
-            image = image.resize((300, 200), Image.ANTIALIAS)
+            image = image.resize((450, 300), Image.ANTIALIAS)
 
             image.save(imagePath, "JPEG")
             command = "UPDATE clients SET photo='{0}' WHERE id={1}".format(imagePath, self.id)
