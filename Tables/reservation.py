@@ -217,18 +217,25 @@ class Reservation:
             pass
 
     def choiceRoom(self, event):
+        self.amount = 0
         _id = self.e_room.get().split(" - ")[0]
         cur.execute("SELECT cost, breakfast FROM rooms WHERE id={0}".format(_id))
         cost = cur.fetchone()
         self.amount = cost[0]+cost[1]
 
+        d1 = datetime.strptime(self.e_dateArrive.get(), "%d.%m.%Y")
+        d2 = datetime.strptime(self.e_dateDepart.get(), "%d.%m.%Y")
+        difference = (d2 - d1).days
         cur.execute("SELECT discount FROM discounts WHERE id={0}".format(_id))
         discount = cur.fetchone()
+        self.amount = self.amount * difference
         if not discount:
             self.l_amount['text'] = 'Итоговая стоимость: ' + str(self.amount)
         else:
-            self.amount -= self.amount * (discount[0]/100)
+            self.amount = ((self.amount * difference) * (discount[0]/100))
+
             self.l_amount['text'] = 'Итоговая стоимость: {0}(Скидка {1}%)'.format(self.amount, discount[0])
+        print(self.amount)
 
     def CreateReceipt(self):
         _id = self.reservation_table.item(self.reservation_table.selection(), 'values')[0]

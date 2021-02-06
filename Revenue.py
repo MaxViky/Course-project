@@ -10,7 +10,7 @@ class Revenue:
         start_date = '{1}-{0}-01'.format(month, year)
         end_date = '{1}-{0}-31'.format(month, year)
         cur.execute('SELECT COUNT(client), SUM(amount) FROM reservation '
-                    'WHERE payment_day >= {0} or payment_day <= {1}'.format(start_date, end_date))
+                    'WHERE payment_day BETWEEN {0} AND {1}'.format(start_date, end_date))
         data = cur.fetchone()
         count = data[0]
         amount = data[1]
