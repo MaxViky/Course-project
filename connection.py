@@ -6,7 +6,8 @@ import mysql.connector
 from mysql.connector import errorcode, Error
 
 try:
-    conn = mysql.connector.connect(host='localhost', database='hostel', user='root', password='1234')
+    # conn = mysql.connector.connect(host='localhost', database='hostel', user='root', password='1234')
+    conn = sql.connect('database/hostels.db')
     cur = conn.cursor()
 except:
     messagebox.showinfo('Ошибка', 'Не удалось соединиться с базой данных.')

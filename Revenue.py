@@ -7,10 +7,15 @@ class Revenue:
     def MonthlyRevenue(self):
         month = datetime.now().month
         year = datetime.now().year
-        start_date = '{1}-{0}-01'.format(month, year)
-        end_date = '{1}-{0}-31'.format(month, year)
-        cur.execute('SELECT COUNT(client), SUM(amount) FROM reservation '
-                    'WHERE payment_day BETWEEN {0} AND {1}'.format(start_date, end_date))
+        cur.execute("SELECT date('now','start of month','+1 month','-1 day')")
+        if month < 10:
+            start_date = '{1}-0{0}-01'.format(month, year)
+        else:
+            start_date = '{1}-{0}-01'.format(month, year)
+        end_date = cur.fetchone()[0]
+
+        cur.execute("SELECT COUNT(client), SUM(amount) FROM reservation "
+                    "WHERE date(payment_day) BETWEEN date('{0}') AND date('{1}')".format(start_date, end_date))
         data = cur.fetchone()
         count = data[0]
         amount = data[1]

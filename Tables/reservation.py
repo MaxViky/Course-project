@@ -1,10 +1,12 @@
-from datetime import datetime
+
 from pydoc import Doc
 from tkinter import ttk, messagebox, filedialog
 from tkinter import *
 
 from docxtpl import DocxTemplate
 from tkcalendar import DateEntry
+
+from datetime import  *
 
 from UI import UI
 from connection import *
@@ -41,9 +43,9 @@ class Reservation:
         cur.execute('SELECT id, name FROM rooms WHERE busy like 0')
         self.e_room = ttk.Combobox(win, width=30, values=["{} - {}".format(*row) for row in cur.fetchall()])
 
-        self.e_dateArrive = DateEntry(win, width=20, date_pattern="dd.mm.yyyy", borderwidth=2)
-        self.e_dateDepart = DateEntry(win, width=20, date_pattern="dd.mm.yyyy", borderwidth=2)
-        self.e_datePay = DateEntry(win, width=20, date_pattern="dd.mm.yyyy", borderwidth=2)
+        self.e_dateArrive = DateEntry(win, width=20, date_pattern="YYYY-mm-dd", borderwidth=2)
+        self.e_dateDepart = DateEntry(win, width=20, date_pattern="YYYY-mm-dd", borderwidth=2)
+        self.e_datePay = DateEntry(win, width=20, date_pattern="YYYY-mm-dd", borderwidth=2)
         self.initUI(win)
 
     def initUI(self, win):
@@ -72,6 +74,10 @@ class Reservation:
 
         self.reservation_table.bind('<ButtonRelease>', self.fillField)
         self.e_room.bind('<<ComboboxSelected>>', self.choiceRoom)
+
+        self.e_dateArrive.bind('<ButtonRelease>', self.sumCost)
+        self.e_dateArrive.bind('<ButtonRelease>', self.sumCost)
+        self.e_dateArrive.bind('<ButtonRelease>', self.sumCost)
 
         self.Docbtn['command'] = self.CreateReceipt
         self.AddBtn['command'] = self.Add
@@ -223,9 +229,11 @@ class Reservation:
         cost = cur.fetchone()
         self.amount = cost[0]+cost[1]
 
-        d1 = datetime.strptime(self.e_dateArrive.get(), "%d.%m.%Y")
-        d2 = datetime.strptime(self.e_dateDepart.get(), "%d.%m.%Y")
+        d1 = self.e_dateArrive.get_date()
+        d2 = self.e_dateDepart.get_date()
         difference = (d2 - d1).days
+        if difference == 0:
+            difference = 1
         cur.execute("SELECT discount FROM discounts WHERE id={0}".format(_id))
         discount = cur.fetchone()
         self.amount = self.amount * difference
@@ -235,7 +243,23 @@ class Reservation:
             self.amount = ((self.amount * difference) * (discount[0]/100))
 
             self.l_amount['text'] = 'Итоговая стоимость: {0}(Скидка {1}%)'.format(self.amount, discount[0])
-        print(self.amount)
+
+    def sumCost(self, event):
+        _id = self.e_room.get().split(" - ")[0]
+        d1 = self.e_dateArrive.get_date()
+        d2 = self.e_dateDepart.get_date()
+        difference = (d2 - d1).days
+        if difference == 0:
+            difference = 1
+        cur.execute("SELECT discount FROM discounts WHERE id={0}".format(_id))
+        discount = cur.fetchone()
+        self.amount = self.amount * difference
+        if not discount:
+            self.l_amount['text'] = 'Итоговая стоимость: ' + str(self.amount)
+        else:
+            self.amount = ((self.amount * difference) * (discount[0] / 100))
+
+            self.l_amount['text'] = 'Итоговая стоимость: {0}(Скидка {1}%)'.format(self.amount, discount[0])
 
     def CreateReceipt(self):
         _id = self.reservation_table.item(self.reservation_table.selection(), 'values')[0]
