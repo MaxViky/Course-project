@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="acd23832-e47a-4af2-be81-e81d8acebfdf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Revenue.py" beforeDir="false" afterPath="$PROJECT_DIR$/Revenue.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AdminPanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/AdminPanel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/Выписка №12021.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/Выписка №12021.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Hotels/1267_room-type.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Hotels/1267_room-type.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Hotels/room-business_002.788c4c20502cae038e66e118c369e7b7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Hotels/room-business_002.788c4c20502cae038e66e118c369e7b7.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Hotels/tajtl-2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Images/Hotels/tajtl-2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tables/asdasda.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/asdasda.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tables/reservation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tables/reservation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/hostels.db" beforeDir="false" afterPath="$PROJECT_DIR$/database/hostels.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,27 +83,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Info (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Hostel" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/adminPanel" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/adminPanel/Info.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Revenue" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Hostel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,6 +96,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Revenue.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="asdasda (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Hostel" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Tables" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Tables/asdasda.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,18 +191,18 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.AdminPanel" />
-      <item itemvalue="Python.Info (1)" />
       <item itemvalue="Python.Revenue" />
       <item itemvalue="Python.asdasda" />
       <item itemvalue="Python.roomInfo" />
+      <item itemvalue="Python.asdasda (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.asdasda (1)" />
         <item itemvalue="Python.AdminPanel" />
         <item itemvalue="Python.roomInfo" />
         <item itemvalue="Python.Revenue" />
         <item itemvalue="Python.asdasda" />
-        <item itemvalue="Python.Info (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -311,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612591084052</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add info rooms and clients">
+      <created>1613014100234</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1613014100234</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -355,33 +366,33 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="450" y="176" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1440.860@0.0.1440.860" timestamp="1610995791343" />
-    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2" timestamp="1612591080240">
+    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2" timestamp="1613014096795">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1612591080240" />
+    <state x="374" y="0" width="692" height="860" key="CommitChangelistDialog2/0.0.1440.860@0.0.1440.860" timestamp="1613014096795" />
     <state x="500" y="184" key="FileChooserDialogImpl" timestamp="1609959192667">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="500" y="184" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1609959192667" />
-    <state width="1419" height="223" key="GridCell.Tab.0.bottom" timestamp="1613014027584">
+    <state width="1419" height="223" key="GridCell.Tab.0.bottom" timestamp="1613069499537">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1613014027584" />
+    <state width="1419" height="223" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1613069499537" />
     <state width="1899" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="223" key="GridCell.Tab.0.center" timestamp="1613014027584">
+    <state width="1419" height="223" key="GridCell.Tab.0.center" timestamp="1613069499536">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1613014027584" />
+    <state width="1419" height="223" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1613069499536" />
     <state width="1899" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="223" key="GridCell.Tab.0.left" timestamp="1613014027584">
+    <state width="1419" height="223" key="GridCell.Tab.0.left" timestamp="1613069499536">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1613014027584" />
+    <state width="1419" height="223" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1613069499536" />
     <state width="1899" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
-    <state width="1419" height="223" key="GridCell.Tab.0.right" timestamp="1613014027584">
+    <state width="1419" height="223" key="GridCell.Tab.0.right" timestamp="1613069499536">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1419" height="223" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1613014027584" />
+    <state width="1419" height="223" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1613069499536" />
     <state width="1899" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1609138840387" />
     <state width="1419" height="276" key="GridCell.Tab.1.bottom" timestamp="1612210410284">
       <screen x="0" y="0" width="1440" height="860" />
@@ -412,14 +423,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="790" y="389" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1609137069856" />
-    <state x="324" y="107" key="Vcs.Push.Dialog.v2" timestamp="1612591090741">
+    <state x="324" y="107" key="Vcs.Push.Dialog.v2" timestamp="1613014114788">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="324" y="107" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1612591090741" />
-    <state x="415" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1613010165016">
+    <state x="324" y="107" key="Vcs.Push.Dialog.v2/0.0.1440.860@0.0.1440.860" timestamp="1613014114788" />
+    <state x="415" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1613065522729">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="415" y="253" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1613010165016" />
+    <state x="415" y="253" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1613065522729" />
     <state x="529" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1612155562699">
       <screen x="0" y="0" width="1440" height="860" />
     </state>

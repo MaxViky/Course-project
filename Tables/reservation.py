@@ -74,10 +74,9 @@ class Reservation:
 
         self.reservation_table.bind('<ButtonRelease>', self.fillField)
         self.e_room.bind('<<ComboboxSelected>>', self.choiceRoom)
-
-        self.e_dateArrive.bind('<ButtonRelease>', self.sumCost)
-        self.e_dateArrive.bind('<ButtonRelease>', self.sumCost)
-        self.e_dateArrive.bind('<ButtonRelease>', self.sumCost)
+        self.e_dateArrive.bind('<<DateEntrySelected>>', self.choiceRoom)
+        self.e_dateDepart.bind('<<DateEntrySelected>>', self.choiceRoom)
+        self.e_datePay.bind('<<DateEntrySelected>>', self.choiceRoom)
 
         self.Docbtn['command'] = self.CreateReceipt
         self.AddBtn['command'] = self.Add
@@ -112,56 +111,55 @@ class Reservation:
         self.Docbtn.grid(row=7, column=3)
 
     def Add(self):
-        try:
-            client = self.e_client.get().split(" - ")[0]
-            room = self.e_room.get().split(" - ")[0]
-            now = datetime.now().date().strftime('%d.%m.%Y')
-            if self.e_dateArrive == now:
-                cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(room))
+        client = self.e_client.get().split(" - ")[0]
+        room = self.e_room.get().split(" - ")[0]
+
+        now = datetime.now().date()
+
+        if self.e_dateArrive.get_date() <= now <= self.e_dateDepart.get_date():
+            cur.execute('UPDATE rooms SET busy = 1 WHERE id={0}'.format(room))
+        else:
+            cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(room))
+        conn.commit()
+
+        if self.e_dateArrive.get_date() > self.e_dateDepart.get_date():
+            messagebox.showinfo('Ошибка', 'Дата прибытия позже даты отбытия')
+        elif self.e_dateArrive.get_date() > self.e_datePay.get_date() < self.e_dateDepart.get_date():
+            messagebox.showinfo('Ошибка', 'Дата оплаты Должна быть в период снятия номера')
+        else:
+            try:
+                command = "INSERT INTO reservation VALUES(Null, {0}, {1}, '{2}', '{3}', '{4}', {5})".format(
+                    client, room, self.e_dateArrive.get(),
+                    self.e_dateDepart.get(), self.e_datePay.get(), self.amount
+                )
+                cur.execute(command)
                 conn.commit()
-
-            command = "INSERT INTO reservation VALUES(Null, {0}, {1}, '{2}', '{3}', '{4}', {5})".format(
-                client, room, self.e_dateArrive.get(),
-                self.e_dateDepart.get(), self.e_datePay.get(), self.amount
-            )
-            cur.execute(command)
-            conn.commit()
-
-            self.reservation_table.delete(*self.reservation_table.get_children())
-
-            cur.execute("SELECT reservation.id, client, name, room, arrival_date, departure_date, payment_day, amount "
-                        "FROM reservation INNER JOIN clients on reservation.client = clients.id LIMIT 5 OFFSET 0")
-            rows = cur.fetchall()
-            for row in rows:
-                self.reservation_table.insert("", "end", values=row)
-        except:
-            messagebox.showinfo('Ошибка', 'Не удалось добавить данные')
+                self.reservation_table.delete(*self.reservation_table.get_children())
+                cur.execute("SELECT reservation.id, client, name, room, arrival_date, departure_date, payment_day, amount "
+                            "FROM reservation INNER JOIN clients on reservation.client = clients.id LIMIT 5 OFFSET 0")
+                rows = cur.fetchall()
+                for row in rows:
+                    self.reservation_table.insert("", "end", values=row)
+            except:
+                messagebox.showinfo('Ошибка', 'Не удалось добавить данные')
 
     def Update(self):
-        cur.execute("SELECT reservation.id, client, name, room, arrival_date, departure_date, payment_day, amount "
-                    "FROM reservation INNER JOIN clients on reservation.client = clients.id LIMIT 5 OFFSET 0")
-        rows = cur.fetchall()
-
-        if self.e_dateArrive.get() > self.e_dateDepart.get():
+        if self.e_dateArrive.get_date() > self.e_dateDepart.get_date():
             messagebox.showinfo('Ошибка', 'Дата прибытия позже даты отбытия')
-        elif self.e_dateArrive.get() > self.e_datePay.get() < self.e_dateDepart.get():
+        elif self.e_dateArrive.get_date() > self.e_datePay.get_date() < self.e_dateDepart.get_date():
             messagebox.showinfo('Ошибка', 'Дата оплаты Должна быть в период снятия номера')
         else:
             try:
                 _id = self.reservation_table.item(self.reservation_table.selection(), 'values')[0]
                 client = self.e_client.get().split(" - ")[0]
                 room = self.e_room.get().split(" - ")[0]
-                now = datetime.now().date().strftime('%d.%m.%Y')
-                cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(
-                    self.reservation_table.item(self.reservation_table.selection(), 'values')[3])
-                )
+                now = datetime.now().date()
+
+                if self.e_dateArrive.get_date() <= now <= self.e_dateDepart.get_date():
+                    cur.execute('UPDATE rooms SET busy = 1 WHERE id={0}'.format(room))
+                else:
+                    cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(room))
                 conn.commit()
-                if self.e_dateArrive.get() == now:
-                    cur.execute('UPDATE rooms SET busy = 1 WHERE id={0}'.format(room))
-                    conn.commit()
-                elif self.e_dateArrive.get() <= now <= self.e_dateDepart.get():
-                    cur.execute('UPDATE rooms SET busy = 1 WHERE id={0}'.format(room))
-                    conn.commit()
 
                 command = "UPDATE reservation SET " \
                           "client={0}, room={1}, arrival_date='{2}', departure_date='{3}', payment_day='{4}', amount={5}" \
@@ -175,6 +173,10 @@ class Reservation:
 
                 self.reservation_table.delete(*self.reservation_table.get_children())
 
+                cur.execute(
+                    "SELECT reservation.id, client, name, room, arrival_date, departure_date, payment_day, amount "
+                    "FROM reservation INNER JOIN clients on reservation.client = clients.id LIMIT 5 OFFSET 0")
+                rows = cur.fetchall()
                 for row in rows:
                     self.reservation_table.insert("", "end", values=row)
 
@@ -182,20 +184,25 @@ class Reservation:
                 messagebox.showinfo('Ошибка', 'Не удалось обновить данные')
 
     def Delete(self):
+        room = self.e_room.get().split(" - ")[0]
         answer = messagebox.askyesno(
             title="Удаление",
             message="Удалить бронь?")
         if answer:
-            cur.execute("SELECT reservation.id, client, name, room, arrival_date, departure_date, payment_day, amount "
-                        "FROM reservation INNER JOIN clients on reservation.client = clients.id LIMIT 5 OFFSET 0")
-            rows = cur.fetchall()
-
             _id = self.reservation_table.item(self.reservation_table.selection(), 'values')[0]
             command = "DELETE FROM reservation WHERE id={0}".format(_id)
             try:
                 cur.execute(command)
 
+                cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(room))
+                conn.commit()
+
                 self.reservation_table.delete(*self.reservation_table.get_children())
+                cur.execute(
+                    "SELECT reservation.id, client, name, room, arrival_date, departure_date, payment_day, amount "
+                    "FROM reservation INNER JOIN clients on reservation.client = clients.id LIMIT 5 OFFSET 0")
+                rows = cur.fetchall()
+
                 for row in rows:
                     self.reservation_table.insert("", "end", values=row)
             except:
@@ -227,6 +234,7 @@ class Reservation:
         _id = self.e_room.get().split(" - ")[0]
         cur.execute("SELECT cost, breakfast FROM rooms WHERE id={0}".format(_id))
         cost = cur.fetchone()
+
         self.amount = cost[0]+cost[1]
 
         d1 = self.e_dateArrive.get_date()
@@ -240,25 +248,7 @@ class Reservation:
         if not discount:
             self.l_amount['text'] = 'Итоговая стоимость: ' + str(self.amount)
         else:
-            self.amount = ((self.amount * difference) * (discount[0]/100))
-
-            self.l_amount['text'] = 'Итоговая стоимость: {0}(Скидка {1}%)'.format(self.amount, discount[0])
-
-    def sumCost(self, event):
-        _id = self.e_room.get().split(" - ")[0]
-        d1 = self.e_dateArrive.get_date()
-        d2 = self.e_dateDepart.get_date()
-        difference = (d2 - d1).days
-        if difference == 0:
-            difference = 1
-        cur.execute("SELECT discount FROM discounts WHERE id={0}".format(_id))
-        discount = cur.fetchone()
-        self.amount = self.amount * difference
-        if not discount:
-            self.l_amount['text'] = 'Итоговая стоимость: ' + str(self.amount)
-        else:
-            self.amount = ((self.amount * difference) * (discount[0] / 100))
-
+            self.amount = self.amount - ((self.amount * difference) / 100 * discount[0])
             self.l_amount['text'] = 'Итоговая стоимость: {0}(Скидка {1}%)'.format(self.amount, discount[0])
 
     def CreateReceipt(self):

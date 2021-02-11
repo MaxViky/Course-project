@@ -1,6 +1,8 @@
 from datetime import datetime
 from tkinter import *
 
+from datetime import *
+
 from Revenue import Revenue
 from Tables.clients import Clients
 from Tables.discount import Discount
@@ -36,11 +38,11 @@ class AdminMenu:
         self.win.configure(menu=menu)
         self.frame.grid(row=0, column=0)
 
-        now = datetime.now().date().strftime('%d.%m.%Y')
+        now = datetime.now().date()
         cur.execute('SELECT room, arrival_date, departure_date FROM reservation')
-        date = cur.fetchall()
-        for i in date:
-            if i[1] < now < i[2]:
+        data = cur.fetchall()
+        for i in data:
+            if datetime.strptime(i[1], '%Y-%m-%d').date() <= now <= datetime.strptime(i[2], '%Y-%m-%d').date():
                 cur.execute('UPDATE rooms SET busy = 1 WHERE id={0}'.format(i[0]))
             else:
                 cur.execute('UPDATE rooms SET busy = 0 WHERE id={0}'.format(i[0]))
